@@ -43,11 +43,11 @@ class TypeSpeedGUI:
         if not self.sample_label.cget("text").startswith(self.input_entry.get()):
             self.input_entry.config(fg="red")
         else:
-            self.input_entry.config(fg="black")
+            self.input_entry.config(fg="green")
 
         if self.input_entry.get() == self.sample_label.cget("text"):
             self.running = False
-            self.input_entry.config(fg="green")
+            self.input_entry.config(state="disable")
 
     def time_thread(self):
         while self.running:
@@ -60,6 +60,7 @@ class TypeSpeedGUI:
             self.speed_label.config(text=f"Speed: \n{cps:.2f} char per sec\n{cpm:.2f} char per min \n{wps:.2f} words per sec\n{wpm:.2f} words per min")
 
     def reset(self):
+        self.input_entry.config(state="normal")
         self.running = False
         self.counter = 0
         self.speed_label.config(text="Speed: \n0.00 char per sec\n0.00 char per min \n0.00 words per sec\n0.00 words per min")
